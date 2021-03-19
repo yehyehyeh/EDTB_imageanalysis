@@ -1,5 +1,4 @@
-
-
+Fiji script for EGFR(red)/Chr7(green) DNA FISH analysis performed on SMJL tumor tissues and HF3016/3177 neurospheres. 
 
 
 dir=getDirectory("macros");
@@ -29,12 +28,12 @@ setThreshold(30, 255);
 run("Convert to Mask");
 run("Watershed");
 
-//Biovexxel Speckle Inspector (Red first)
+//Biovexxel Speckle Inspector (for EGFR signals)
 run("Speckle Inspector", "big=["+blue+"] small=["+red+"] redirect=None min_object=5000 exclude speckle");
 saveAs("results");
 
 
 
-//Biovexxel Speckle Inspector (Red first)
+//Biovexxel Speckle Inspector (for Chr7 signals)
 run("Speckle Inspector", "big=["+blue+"] small=["+green+"] redirect=None min_object=5000 exclude speckle");
 saveAs("results");
