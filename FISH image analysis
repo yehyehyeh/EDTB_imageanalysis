@@ -1,0 +1,40 @@
+
+
+
+
+dir=getDirectory("macros");
+
+//Split channels and mask images
+imageName=getTitle();
+run("Split Channels");
+red=imageName+" (red)";
+green=imageName+" (green)";
+blue=imageName+" (blue)";
+selectWindow(red);
+setAutoThreshold("Default dark");
+run("Threshold...");
+setThreshold(80, 255);
+run("Convert to Mask");
+run("Watershed");
+selectWindow(green);
+setAutoThreshold("Default dark");
+run("Threshold...");
+setThreshold(80, 255);
+run("Convert to Mask");
+run("Watershed");
+selectWindow(blue);
+setAutoThreshold("Default dark");
+run("Threshold...");
+setThreshold(30, 255);
+run("Convert to Mask");
+run("Watershed");
+
+//Biovexxel Speckle Inspector (Red first)
+run("Speckle Inspector", "big=["+blue+"] small=["+red+"] redirect=None min_object=5000 exclude speckle");
+saveAs("results");
+
+
+
+//Biovexxel Speckle Inspector (Red first)
+run("Speckle Inspector", "big=["+blue+"] small=["+green+"] redirect=None min_object=5000 exclude speckle");
+saveAs("results");
